@@ -1,0 +1,24 @@
+line 1 2 3 4
+Rectangle 30 30 150 250
+PolyLine 3 10 20 30 40 50 60
+line 10 20 30 40
+Rectangle 5 5 100 200
+PolyLine 3 10 20 30 40 50 60
+line 1 2 3 4
+Rectangle 30 30 150 250
+PolyLine 3 10 20 30 40 50 60
+line 10 20 30 40
+Rectangle 5 5 100 200
+PolyLine 3 10 20 30 40 50 60
+line 1 2 3 4
+Rectangle 30 30 150 250
+PolyLine 3 10 20 30 40 50 60
+line 10 20 30 40
+Rectangle 5 5 100 200
+PolyLine 3 10 20 30 40 50 60
+line 1 2 3 4
+Rectangle 30 30 150 250
+PolyLine 3 10 20 30 40 50 60
+line 10 20 30 40
+Rectangle 5 5 100 200
+PolyLine 3 10 20 30 40 50 60
