@@ -96,13 +96,17 @@ public:
 };
 class Driver {
     string name;
+    string surname;
     int age;
     int experience;
 public:
-    Driver():name("None"),age(0),experience(0){}
-    Driver(string n,int a,int e):name(n),age(a),experience(e){}
+    Driver():name("None"),surname("None"), age(0), experience(0) {}
+    Driver(string n,string s,int a,int e):name(n),surname(s), age(a), experience(e){}
     void ChangeName(string name) {
         this->name = name;
+    }
+    void ChangeSurname(string surname) {
+        this->surname = surname;
     }
 
     void ChangeAge(int age) {
@@ -114,9 +118,11 @@ public:
     }
     void Show() const {
         cout << "Name: " << name << endl;
+        cout << "Surname: " << surname << endl;
         cout << "age: " << age << endl;
         cout << "experience: " << experience << endl;
     }
+    
 };
 class Car {
     string brand;
@@ -129,18 +135,27 @@ class Car {
     Wheel wheels[4];
     Engine engine;
     Body body;
-    Driver driver;
+    Driver * driver;
 
 public:
-    Car() : brand("None"), model("None"), year(0), speed(0), headlights{ Headlight(), Headlight() }, doors{ Door(), Door(), Door(), Door() }, wheels{ Wheel(), Wheel(), Wheel(), Wheel() }, engine(), body(), driver() {}
+    Car() : brand("None"), model("None"), year(0), speed(0), headlights{ Headlight(), Headlight() }, doors{ Door(), Door(), Door(), Door() }, wheels{ Wheel(), Wheel(), Wheel(), Wheel() }, engine(), body(), driver(nullptr) {}
 
-    Car(string b, string m, int y, int s, Headlight h1, Headlight h2, Door d1, Door d2, Door d3, Door d4, Wheel w1, Wheel w2, Wheel w3, Wheel w4, Engine e, Body bo, Driver dr) : brand(b), model(m), year(y), speed(s), headlights{ h1, h2 }, doors{ d1, d2, d3, d4 }, wheels{ w1, w2, w3, w4 }, engine(e), body(bo), driver(dr) {}
+    Car(string b, string m, int y, int s, Headlight h1, Headlight h2, Door d1, Door d2, Door d3, Door d4, Wheel w1, Wheel w2, Wheel w3, Wheel w4, Engine e, Body bo) : brand(b), model(m), year(y), speed(s), headlights{ h1, h2 }, doors{ d1, d2, d3, d4 }, wheels{ w1, w2, w3, w4 }, engine(e), body(bo), driver(nullptr) {}
+    Car(string b, string m, int y, int s, Headlight h1, Headlight h2, Door d1, Door d2, Door d3, Door d4, Wheel w1, Wheel w2, Wheel w3, Wheel w4, Engine e, Body bo,Driver * driver) : brand(b), model(m), year(y), speed(s), headlights{ h1, h2 }, doors{ d1, d2, d3, d4 }, wheels{ w1, w2, w3, w4 }, engine(e), body(bo),driver(driver) {}
 
     void Show() const {
         cout << "brand: " << brand << endl;
         cout << "model: " << model << endl;
         cout << "year: " << year << endl;
         cout << "speed: " << speed << endl;
+        if (driver != nullptr)
+        {
+            driver->Show();
+        }
+        else
+        {
+            cout << "Driver not found!" << endl;
+        }
     }
     void ChangeSpeed(int speed) {
         this->speed = speed;
@@ -152,6 +167,9 @@ public:
 
     void ChangeModel(string model) {
         this->model = model;
+    }
+    void AddDriver(Driver* driver) {
+        this->driver = driver;
     }
 };
 int main()
@@ -180,16 +198,39 @@ int main()
     body.ChangeColor("White");
     body.Show();
 
-    Driver driver("Alex", 25, 5);
+    Driver driver("Alex","Mixnov", 25, 5);
     driver.ChangeName("Max");
     driver.ChangeAge(30);
     driver.ChangeExperience(10);
     driver.Show();
 
-    Car car("BMW", "M5", 2022, 100, headlight, headlight, door, door, door, door, wheel, wheel, wheel, wheel, engine, body, driver);
+    Car car("BMW", "M5", 2022, 100, headlight, headlight, door, door, door, door, wheel, wheel, wheel, wheel, engine, body, &driver);
     car.ChangeSpeed(150);
     car.ChangeBrand("Audi");
     car.ChangeModel("RS7");
     car.Show();
 
+    Driver driver2("John", "Smith", 35, 12);
+
+    Car car2("BMW", "M3", 2023, 200,
+        headlight, headlight,
+        door, door, door, door,
+        wheel, wheel, wheel, wheel,
+        engine, body, &driver2);
+
+    car2.Show();
+
+    Car car3;
+
+    car3.Show();
+
+    car3.AddDriver(&driver2);
+
+    car3.Show();
+
+    Driver driver3("Max", "Brown", 28, 7);
+
+    car3.AddDriver(&driver3);
+
+    car3.Show();
 }
